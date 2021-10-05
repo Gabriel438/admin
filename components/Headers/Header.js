@@ -12,7 +12,7 @@ function Header() {
 	getUser();
 	async function getUser() {
 		try {
-			const response = await axios.get('https://api.orbt.com.br/barbosa/index.php/getAllAluguel');
+			const response = await axios.get('http://api.orbt.com.br/barbosa/index.php/getAllAluguel');
 			setAlugados(response.data.data);
 		} catch (error) {
 			console.error(error);
