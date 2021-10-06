@@ -4,6 +4,8 @@ import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 
+import ContextWrapper from 'components/ContextWrapper';
+
 import PageChange from "components/PageChange/PageChange.js";
 
 import "assets/plugins/nucleo/css/nucleo.css";
@@ -72,7 +74,9 @@ export default class MyApp extends App {
           <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
         </Head>
         <Layout>
-          <Component {...pageProps} />
+          <ContextWrapper>
+            <Component {...pageProps} />
+          </ContextWrapper>
         </Layout>
       </React.Fragment>
     );

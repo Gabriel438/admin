@@ -49,17 +49,23 @@ const Dashboard = props => {
 	}
 
 	const [alugados,setAlugados] = useState([]);
+	const [vencidos,setVencidos] = useState([]);
 
 	const toggleNavs = (e, index) => {
 		e.preventDefault()
 		setActiveNav(index)
 		setChartExample1Data('data' + index)
 	}
-	getUser();
-	async function getUser() {
+	getAlugueis();
+	async function getAlugueis() {
 		try {
 			const response = await axios.get('https://api.orbt.com.br/barbosa/index.php/getAllAluguel');
-			setAlugados(response.data.data);
+			if(response.data.alugados){
+                setAlugados(response.data.alugados);
+            }
+            if(response.data.vencidos){
+                setVencidos(response.data.vencidos);
+            }
 		} catch (error) {
 			console.error(error);
 		}
@@ -100,46 +106,34 @@ const Dashboard = props => {
 										<td>
 											{inc.endereco},{inc.numero} {inc.bairro} - {inc.cidade}
 										</td>
-										<td>{inc.data_vencimento}</td>
+										<td>{inc.data_aluguel}</td>
 										<td>
-											{inc.faturas>0?(
-												<Badge
-													color=""
-													className="badge-dot mr-4"
-												>
-													<i className="bg-danger" />
-													Em aberto
-												</Badge>
-											):(
-												<Badge
-													color=""
-													className="badge-dot mr-4"
-												>
-													<i className="bg-success" />
-													Pago
-												</Badge>
-											)}
-										</td>
-										<td>
-											<Pagination
-												className="pagination justify-content-end mb-0"
-												listClassName="justify-content-end mb-0"
+											<Badge
+												color=""
+												className="badge-dot mr-4"
 											>
-												<PaginationItem className="">
-													<PaginationLink
-														href="#pablo"
-														onClick={e =>
-															e.preventDefault()
-														}
-														tabIndex="-1"
-													>
-														<i className="fas fa-angle-right" />
-														<span className="sr-only">
-															Previous
-														</span>
-													</PaginationLink>
-												</PaginationItem>
-											</Pagination>
+												<i className="bg-danger" />
+												Em aberto
+											</Badge>
+										</td>
+									</tr>
+									))}
+								{vencidos &&
+									vencidos.map(inc => (
+									<tr>
+										<th scope="row">{inc.cliente}</th>
+										<td>
+											{inc.endereco},{inc.numero} {inc.bairro} - {inc.cidade}
+										</td>
+										<td>{inc.data_aluguel}</td>
+										<td>
+											<Badge
+												color=""
+												className="badge-dot mr-4"
+											>
+												<i className="bg-success" />
+												Pago
+											</Badge>
 										</td>
 									</tr>
 									))}

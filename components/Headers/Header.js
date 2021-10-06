@@ -1,23 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 
 // reactstrap components
+import HeaderContext from "../../contexts/HeaderContext";
+
 import { Card, CardBody, CardTitle, Container, Row, Col } from 'reactstrap'
 
 function Header() {
-	
-	const axios = require('axios');
-
-	const [alugados,setAlugados] = useState([]);
-
-	getUser();
-	async function getUser() {
-		try {
-			const response = await axios.get('https://api.orbt.com.br/barbosa/index.php/getAllAluguel');
-			setAlugados(response.data.data);
-		} catch (error) {
-			console.error(error);
-		}
-	}
+	const {alugados,disponiveis,vencidos} = useContext(HeaderContext);
 	return (
 		<>
 			<div className="header bg-gradient-dark pb-7 pb-md-8 pt-5 pt-md-5">
@@ -37,7 +26,7 @@ function Header() {
 													Alugados
 												</CardTitle>
 												<span className="h2 font-weight-bold mb-0">
-													{alugados.length}
+													{alugados}
 												</span>
 											</div>
 											<Col className="col-auto">
@@ -61,7 +50,7 @@ function Header() {
 													Disponíveis
 												</CardTitle>
 												<span className="h2 font-weight-bold mb-0">
-													2,356
+													{disponiveis}
 												</span>
 											</div>
 											<Col className="col-auto">
@@ -85,7 +74,7 @@ function Header() {
 													Vencidos
 												</CardTitle>
 												<span className="h2 font-weight-bold mb-0">
-													924
+													{vencidos}
 												</span>
 											</div>
 											<Col className="col-auto">
