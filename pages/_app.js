@@ -4,7 +4,7 @@ import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 
-import ContextWrapper from 'components/ContextWrapper';
+import ContextWrapper from 'components/ContextWrapper.js';
 
 import PageChange from "components/PageChange/PageChange.js";
 
