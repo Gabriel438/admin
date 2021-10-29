@@ -112,8 +112,8 @@ const Dashboard = props => {
 												color=""
 												className="badge-dot mr-4"
 											>
-												<i className="bg-danger" />
-												Em aberto
+												<i className="bg-info" />
+												Alugados
 											</Badge>
 										</td>
 									</tr>
@@ -131,8 +131,8 @@ const Dashboard = props => {
 												color=""
 												className="badge-dot mr-4"
 											>
-												<i className="bg-success" />
-												Pago
+												<i className="bg-danger" />
+												Em Aberto
 											</Badge>
 										</td>
 									</tr>
